@@ -186,6 +186,10 @@ docker compose --profile app up -d --build
 
 The included multi-stage [Dockerfile](Dockerfile) produces the Next.js standalone server.
 
+### OpenAI Sites
+
+The repository is linked to its production Sites project through `.openai/hosting.json`. Runtime secrets are configured in the hosting environment and are never committed.
+
 ## Security notes
 
 - Passwords are bcrypt-hashed and never selected by default.
