@@ -1,0 +1,15 @@
+import { PERMISSIONS } from '@/constants/permissions';
+import { defineRoute } from '@/lib/api/handler';
+import { ValidationError } from '@/lib/api/errors';
+import { ok } from '@/lib/api/response';
+import { voidOrder } from '@/services/order-service';
+import { reasonSchema, type ReasonInput } from '@/validators/order';
+
+export const POST = defineRoute<ReasonInput, { id: string }>(
+  { permissions: [PERMISSIONS.ORDER_VOID], bodySchema: reasonSchema },
+  async ({ params, branchId, body }) => {
+    if (!branchId) throw new ValidationError('No active branch selected.');
+    const order = await voidOrder(params.id, branchId, body.reason);
+    return ok(order);
+  },
+);
