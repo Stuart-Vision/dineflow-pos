@@ -201,7 +201,38 @@ For internet-facing use, replace the in-memory rate limiter with Redis, configur
 
 ## Screenshots
 
-The recommended portfolio capture order and viewport sizes are listed in [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md).
+### Public landing
+
+![DineFlow POS public landing page](docs/screenshots/01-landing-page.png)
+
+### Management dashboard
+
+![DineFlow POS management dashboard](docs/screenshots/03-dashboard.png)
+
+### Point of sale
+
+![DineFlow POS ordering workspace](docs/screenshots/04-point-of-sale.png)
+
+### Kitchen and inventory
+
+| Kitchen display | Inventory management |
+|---|---|
+| ![Kitchen display](docs/screenshots/05-kitchen-display.png) | ![Inventory management](docs/screenshots/06-inventory.png) |
+
+### Reports
+
+![DineFlow POS reports](docs/screenshots/07-reports.png)
+
+<details>
+<summary>Login and mobile dashboard</summary>
+
+![DineFlow POS login](docs/screenshots/02-login-page.png)
+
+![DineFlow POS mobile dashboard](docs/screenshots/08-mobile-dashboard.png)
+
+</details>
+
+The recommended portfolio capture order and viewport sizes are listed in [docs/SCREENSHOTS.md](docs/SCREENSHOTS.md). Recreate the gallery at any time with `npm run screenshots` while the seeded application is running.
 
 ## Future improvements
 
