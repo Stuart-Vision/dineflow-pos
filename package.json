@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:hosting": "opennextjs-cloudflare build",
     "start": "next start",
+    "preview:hosting": "opennextjs-cloudflare preview",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
@@ -64,6 +66,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
+    "@opennextjs/cloudflare": "^1.20.2",
     "@playwright/test": "^1.49.1",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/bcryptjs": "^2.4.6",
