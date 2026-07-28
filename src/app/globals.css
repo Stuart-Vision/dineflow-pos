@@ -1,0 +1,376 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+/* next-themes drives the theme by stamping `class="dark"` on <html>. */
+@custom-variant dark (&:is(.dark *));
+
+/* ===========================================================================
+   DineFlow design tokens
+   ---------------------------------------------------------------------------
+   Brand: deep teal + navy. The sidebar is intentionally dark in BOTH themes —
+   it is the product's signature surface — so it carries its own token set that
+   does not flip with the rest of the UI.
+
+   Chart series tokens are a separately validated categorical palette (see
+   docs/DESIGN-SYSTEM.md). Slot order is fixed and must never be cycled.
+   =========================================================================== */
+
+:root {
+  --radius: 0.625rem;
+
+  /* --- Surfaces & ink ---------------------------------------------------- */
+  --background: #f5f7f8;
+  --foreground: #0f1b24;
+  --card: #ffffff;
+  --card-foreground: #0f1b24;
+  --popover: #ffffff;
+  --popover-foreground: #0f1b24;
+  --muted: #eef1f3;
+  --muted-foreground: #5b6b76;
+
+  /* --- Brand ------------------------------------------------------------- */
+  --primary: #0d8480;
+  --primary-foreground: #ffffff;
+  --secondary: #e8edf0;
+  --secondary-foreground: #17323f;
+  --accent: #e6f6f4;
+  --accent-foreground: #0b5d5a;
+
+  /* --- Status (fixed roles — never reused as a series color) ------------- */
+  --destructive: #d03b3b;
+  --destructive-foreground: #ffffff;
+  --success: #0f7a30;
+  --success-foreground: #ffffff;
+  --warning: #b26a00;
+  --warning-foreground: #ffffff;
+  --info: #2a78d6;
+  --info-foreground: #ffffff;
+
+  /* --- Lines ------------------------------------------------------------- */
+  --border: #dce3e8;
+  --input: #dce3e8;
+  --ring: #17a29b;
+
+  /* --- Sidebar (dark in both themes) ------------------------------------- */
+  --sidebar: #0c2430;
+  --sidebar-foreground: #cbdae1;
+  --sidebar-muted-foreground: #7e97a3;
+  --sidebar-accent: #12303e;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-primary: #17a29b;
+  --sidebar-primary-foreground: #04211f;
+  --sidebar-border: #1a3a49;
+
+  /* --- Chart series (validated categorical order — do not reorder) ------- */
+  --chart-1: #2a78d6; /* blue    */
+  --chart-2: #eb6834; /* orange  */
+  --chart-3: #1baf7a; /* aqua    */
+  --chart-4: #eda100; /* yellow  */
+  --chart-5: #e87ba4; /* magenta */
+  --chart-6: #008300; /* green   */
+  --chart-7: #4a3aa7; /* violet  */
+  --chart-8: #e34948; /* red     */
+
+  /* Chart chrome */
+  --chart-grid: #e6eaee;
+  --chart-axis: #b8c4cc;
+  --chart-label: #6b7a85;
+  --chart-surface: #ffffff;
+
+  /* Sequential ramp (single hue, light -> dark) */
+  --seq-100: #cde2fb;
+  --seq-250: #86b6ef;
+  --seq-400: #3987e5;
+  --seq-550: #1c5cab;
+  --seq-700: #0d366b;
+}
+
+.dark {
+  --background: #080f1a;
+  --foreground: #e8eef4;
+  --card: #111a2b;
+  --card-foreground: #e8eef4;
+  --popover: #111a2b;
+  --popover-foreground: #e8eef4;
+  --muted: #182437;
+  --muted-foreground: #93a4b8;
+
+  --primary: #17a29b;
+  --primary-foreground: #04211f;
+  --secondary: #182437;
+  --secondary-foreground: #dbe6ef;
+  --accent: #14303a;
+  --accent-foreground: #7fdcd5;
+
+  --destructive: #e05c5c;
+  --destructive-foreground: #1a0708;
+  --success: #22b04a;
+  --success-foreground: #04170a;
+  --warning: #e5a33a;
+  --warning-foreground: #1d1204;
+  --info: #4f97e8;
+  --info-foreground: #04101f;
+
+  --border: #1f2c40;
+  --input: #1f2c40;
+  --ring: #38bdb5;
+
+  /* Sidebar deepens slightly rather than inverting. */
+  --sidebar: #071822;
+  --sidebar-foreground: #c3d3db;
+  --sidebar-muted-foreground: #748c99;
+  --sidebar-accent: #0e2836;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-primary: #17a29b;
+  --sidebar-primary-foreground: #04211f;
+  --sidebar-border: #143140;
+
+  /* Same eight hues, re-stepped for the dark surface — not an auto-flip. */
+  --chart-1: #3987e5;
+  --chart-2: #d95926;
+  --chart-3: #199e70;
+  --chart-4: #c98500;
+  --chart-5: #d55181;
+  --chart-6: #008300;
+  --chart-7: #9085e9;
+  --chart-8: #e66767;
+
+  --chart-grid: #1c2839;
+  --chart-axis: #33455c;
+  --chart-label: #8fa0b3;
+  --chart-surface: #111a2b;
+
+  --seq-100: #0d366b;
+  --seq-250: #184f95;
+  --seq-400: #256abf;
+  --seq-550: #3987e5;
+  --seq-700: #86b6ef;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-outfit), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Mono', 'Segoe UI Mono', Menlo, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-muted-foreground: var(--sidebar-muted-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-6: var(--chart-6);
+  --color-chart-7: var(--chart-7);
+  --color-chart-8: var(--chart-8);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-axis: var(--chart-axis);
+  --color-chart-label: var(--chart-label);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 10px);
+
+  --shadow-card: 0 1px 2px 0 rgb(15 27 36 / 0.04), 0 1px 3px 0 rgb(15 27 36 / 0.06);
+  --shadow-raised: 0 4px 16px -2px rgb(15 27 36 / 0.08), 0 2px 6px -2px rgb(15 27 36 / 0.05);
+  --shadow-overlay: 0 24px 48px -12px rgb(15 27 36 / 0.22);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.018em;
+  }
+
+  /* Keyboard focus is always visible; pointer focus is not. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Columns of figures must align; prose numbers should not be forced. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+}
+
+@layer components {
+  /* Scrollbars: unobtrusive, themed, and consistent across the app. */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--muted-foreground) 35%, transparent) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background-color: color-mix(in oklab, var(--muted-foreground) 30%, transparent);
+    border-radius: 9999px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in oklab, var(--muted-foreground) 50%, transparent);
+  }
+
+  /* Shimmer used by every skeleton loader. */
+  .skeleton {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--muted);
+  }
+  .skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--card) 55%, transparent),
+      transparent
+    );
+    animation: dineflow-shimmer 1.6s infinite;
+  }
+
+  @keyframes dineflow-shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Subtle "fresh data landed" pulse for KDS + notification badges. */
+  @keyframes dineflow-pulse-ring {
+    0% {
+      box-shadow: 0 0 0 0 color-mix(in oklab, var(--warning) 55%, transparent);
+    }
+    70% {
+      box-shadow: 0 0 0 10px transparent;
+    }
+    100% {
+      box-shadow: 0 0 0 0 transparent;
+    }
+  }
+  .pulse-ring {
+    animation: dineflow-pulse-ring 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print — receipts and invoices.
+   The page size itself is injected at print time by the receipt renderer
+   (@page cannot be selected by a class), these rules cover everything else.
+   --------------------------------------------------------------------------- */
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .no-print,
+  nav[data-app-nav],
+  aside[data-app-sidebar],
+  header[data-app-header] {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-surface {
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Keep a receipt or an invoice line-item block from splitting across pages. */
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+/* Users who ask for reduced motion get none of the decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
