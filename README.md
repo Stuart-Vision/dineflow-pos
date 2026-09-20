@@ -1,8 +1,17 @@
 # DineFlow POS – Restaurant Management System
 
-DineFlow POS is a production-style, full-stack restaurant point-of-sale and management platform. It combines front-of-house ordering, kitchen operations, stock control, purchasing, CRM, workforce management, finance, and multi-branch reporting in one responsive application.
+DineFlow POS is a full-stack restaurant point-of-sale and management platform. It combines front-of-house ordering, kitchen operations, stock control, purchasing, CRM, workforce management, finance, and multi-branch reporting in one responsive application.
 
-Built as a commercial-quality portfolio project with realistic restaurant workflows—not a static dashboard template.
+This portfolio application explores restaurant workflows across ordering, kitchen operations, payments, and inventory.
+
+## Project status and limitations
+
+- The default configuration uses demo payments and log-based email; live integrations require additional configuration and implementation.
+- The in-memory rate limiter needs a shared store for deployments with multiple instances.
+- Hardware printing, offline cashier support, and provider integrations are future improvements.
+- The release checks below describe how to verify a checkout; this README does not certify production readiness.
+
+[Architecture](#architecture) · [Local installation](#local-installation) · [Testing](#testing) · [Screenshots](#screenshots)
 
 ## Highlights
 
@@ -245,16 +254,6 @@ The recommended portfolio capture order and viewport sizes are listed in [docs/S
 - Redis-backed distributed rate limits and event fan-out
 - Offline-first cashier queue and conflict resolution
 - Native mobile waiter application
-
-## Portfolio copy
-
-**GitHub description:** Full-stack multi-branch restaurant POS with kitchen display, inventory, CRM, workforce, payments, reporting, RBAC, MongoDB, and Next.js.
-
-**Portfolio description:** Designed and developed a commercial-style restaurant operating platform covering the complete order lifecycle—from cashier and table service through kitchen production, payment, stock deduction, loyalty, workforce controls, and multi-branch analytics.
-
-**Freelancer gig title:** I will build a custom restaurant POS, kitchen display and inventory management system
-
-**Gig summary:** I develop responsive restaurant software including cashier POS, kitchen tickets, table and reservation management, recipes and inventory, supplier purchasing, receipts, CRM, staff access, expenses, and business reporting. The architecture can be customised for single or multi-branch restaurants.
 
 ## Licence
 
