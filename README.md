@@ -1,5 +1,7 @@
 # DineFlow POS – Restaurant Management System
 
+**Live demo:** [dineflow-pos-three.vercel.app](https://dineflow-pos-three.vercel.app) · Owner `owner@dineflow.com` / `Owner@123` (more roles are listed on the login page)
+
 DineFlow POS is a full-stack restaurant point-of-sale and management platform. It combines front-of-house ordering, kitchen operations, stock control, purchasing, CRM, workforce management, finance, and multi-branch reporting in one responsive application.
 
 This portfolio application explores restaurant workflows across ordering, kitchen operations, payments, and inventory.
