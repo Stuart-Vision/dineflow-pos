@@ -9,6 +9,8 @@ import { z } from 'zod';
  */
 const serverSchema = z.object({
   MONGODB_URI: z.string().min(1, 'MONGODB_URI is required'),
+  /** Database name; overrides the one in MONGODB_URI (useful on a shared cluster). */
+  MONGODB_DB: z.string().optional(),
   AUTH_SECRET: z.string().min(32, 'AUTH_SECRET must be at least 32 characters'),
 
   AUTH_SESSION_TTL: z.coerce.number().int().positive().default(43_200),

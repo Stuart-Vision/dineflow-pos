@@ -40,6 +40,7 @@ export async function connectToDatabase(uri?: string): Promise<Mongoose> {
 
     cache.promise = mongoose
       .connect(connectionString, {
+        dbName: process.env.MONGODB_DB || undefined,
         bufferCommands: false,
         maxPoolSize: 20,
         minPoolSize: 2,
